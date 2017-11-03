@@ -1,5 +1,9 @@
 def attr_resolver(attname, default_value, root, info, **args):
-    return getattr(root, attname, default_value)
+    from sennder.apps.infrastructure.models.transfer import Step
+    try:
+        return getattr(root, attname, default_value)
+    except Step.DoesNotExist:
+        return
 
 
 def dict_resolver(attname, default_value, root, info, **args):
